@@ -1,0 +1,220 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3e8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            width: 350px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        h1 {
+            color: #7b2cbf;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 96%;
+            padding: 12px;
+            margin-top: 10px;
+            background: #9d4edd;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #7b2cbf;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .sum {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .sum input {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Авторизация</h1>
+
+    <input type="text" id="login" placeholder="Введите логин">
+
+    <input type="password" id="password" placeholder="Введите пароль">
+
+    <button onclick="loginUser()">Войти</button>
+
+    <div id="message"></div>
+
+
+    <div class="sum">
+
+        <h2>Сумма чисел</h2>
+
+        <input
+            type="text"
+            id="numbers"
+            placeholder="Например: 2,5,6,7"
+        >
+
+        <button onclick="calculateSum()">Посчитать сумму</button>
+
+        <div id="sumResult"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // =========================
+    // ЗАДАНИЕ 1. АВТОРИЗАЦИЯ
+    // =========================
+
+    const users = [
+        {
+            login: "admin",
+            password: "1234",
+            name: "Администратор"
+        },
+        {
+            login: "user1",
+            password: "1111",
+            name: "Анна"
+        },
+        {
+            login: "user2",
+            password: "2222",
+            name: "Мария"
+        },
+        {
+            login: "user3",
+            password: "3333",
+            name: "Алексей"
+        },
+        {
+            login: "user4",
+            password: "4444",
+            name: "Иван"
+        },
+        {
+            login: "user5",
+            password: "5555",
+            name: "Ольга"
+        }
+    ];
+
+
+    function loginUser() {
+
+        const login = document.getElementById("login").value;
+
+        const password = document.getElementById("password").value;
+
+        // Ищем пользователя в массиве
+        const user = users.find(function(user) {
+            return user.login === login && user.password === password;
+        });
+
+
+        const message = document.getElementById("message");
+
+
+        if (user) {
+
+            message.style.color = "green";
+
+            message.textContent =
+                "Добро пожаловать, " + user.name + "!";
+
+        } else {
+
+            message.style.color = "red";
+
+            message.textContent =
+                "Ошибка! Неверный логин или пароль.";
+
+        }
+    }
+
+
+
+    // =========================
+    // ЗАДАНИЕ 2. SUMALL
+    // =========================
+
+    function sumAll(...numbers) {
+
+        let sum = 0;
+
+        for (let number of numbers) {
+
+            sum += number;
+
+        }
+
+        return sum;
+    }
+
+
+    function calculateSum() {
+
+        const input = document.getElementById("numbers").value;
+
+        // Разделяем числа через запятую
+        const numbers = input
+            .split(",")
+            .map(Number);
+
+        const result = sumAll(...numbers);
+
+        document.getElementById("sumResult").textContent =
+            "Сумма: " + result;
+    }
+
+</script>
+
+</body>
+</html>
+```
